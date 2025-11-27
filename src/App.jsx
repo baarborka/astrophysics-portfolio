@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { Book, Mail, Github, Linkedin, ExternalLink, GraduationCap, Telescope, Atom, MapPin, ChevronDown, Menu, X, Star, Activity, Clock, FileText, Link as LinkIcon, Code } from 'lucide-react';
+import { Book, Mail, Github, Linkedin, ExternalLink, GraduationCap, Telescope, Atom, MapPin, ChevronDown, Menu, X, Star, Activity, Clock, FileText, Code, Download, Phone, Briefcase, Mic } from 'lucide-react';
 
 // ==========================================
-// 🚀 USER DATA SECTION - EDIT THIS AREA ONLY
+// 🚀 USER DATA SECTION
 // ==========================================
 
 const portfolioData = {
+  // --- FILES ---
+  files: {
+    cv: "/cv.pdf",        
+    photo: "/photo.jpg"   
+  },
+
   // --- HERO SECTION ---
   hero: {
     name: "Barbora Hudačková",
@@ -17,26 +23,81 @@ const portfolioData = {
     secondaryAction: "Contact Me"
   },
 
+  // --- CV CONTENT ---
+  cvContent: {
+    contact: {
+      phone: "+421 949 063 381",
+      email: "barb.hudackova@gmail.com",
+      location: "Brno, Czech Republic"
+    },
+    education: [
+      {
+        school: "Masaryk University, Brno",
+        degree: "Mgr. in Astrophysics",
+        year: "Expected 2027",
+        details: "Focus: High-energy astrophysics, Quantum-gravity phenomenology, data analysis."
+      },
+      {
+        school: "Masaryk University, Brno",
+        degree: "Bc. in Astrophysics",
+        year: "Sept 2022 - June 2025",
+        details: "Thesis: Analysis of time delay of gamma-ray bursts."
+      }
+    ],
+    experience: [
+      {
+        role: "Barista, Bartender",
+        company: "Anoda Bar",
+        year: "Oct 2024 - Present",
+        desc: "Head barista & customer service. Supported team organization and operations."
+      },
+      {
+        role: "Barista",
+        company: "Kafehaus Barzzuz",
+        year: "Sept 2018 - June 2022",
+        desc: "Gaining experience in team organization, team work and operating organization."
+      }
+    ],
+    teaching: [
+      {
+        role: "Lecturer (MjUNI Program)",
+        org: "Masaryk University",
+        year: "Oct 2023 - Present",
+        desc: "Developed and delivered series of lectures on Black Holes and Astrobiology for high-school students."
+      },
+      {
+        role: "Public Outreach",
+        org: "MUNI Sci",
+        year: "Sept 2022 - Present",
+        desc: "Organizing faculty Open Days, presenting experiments at Starmus science village, Science nights and Brno science festival."
+      }
+    ],
+    skills: [
+      { category: "Programming", items: "Python (SciPy, Numpy, Astropy, Matplotlib, Plotly), Git" },
+      { category: "Physics Expertise", items: "Astrophysics, High-Energy Physics, Cosmology" },
+      { category: "Data Analysis", items: "Data simulations, Signal processing" },
+      { category: "Languages", items: "English (Fluent), Slovak (Native), Czech (Fluent), German (Intermediate)" }
+    ]
+  },
+
   // --- ABOUT SECTION & EDUCATION ---
   about: {
     title: "About Me",
     description: "I am a graduate student at the Department of Theoretical Physics and Astrophysics at Masaryk University. My research focuses on high-energy astrophysics, specifically testing predictions of quantum gravity models using Gamma-Ray Bursts (GRBs).",
     education: [
       {
-        degree: "Mgr. in Astrophysics", // Updated from MSc
+        degree: "Mgr. in Astrophysics",
         school: "Masaryk University, Faculty of Science",
         year: "2025 - Present",
         details: "Focus on High Energy Astrophysics and Quantum Gravity Phenomenology.",
-        // ⬇️ PASTE YOUR MASTER'S THESIS ZADANIE HERE ⬇️
         thesisAssignment: "Topic: Prediction Methods for GRB Time-Delay Analysis\n\nObjective: Small time delays in gamma-ray burst (GRB) signals may carry signatures of Planck-scale physics. This thesis aims to develop and evaluate a method that uses multiple information channels to generate predictive models of GRB timing. The resulting prediction errors will then be analyzed to identify systematic patterns that could indicate such fundamental-scale effects.", 
         thesisLink: "" 
       },
       {
-        degree: "Bc. in Astrophysics", // Updated from BSc
+        degree: "Bc. in Astrophysics",
         school: "Masaryk University, Faculty of Science",
         year: "2022 - 2025",
         details: "",
-        // ⬇️ BACHELOR THESIS LINK IS HERE ⬇️
         thesisTitle: "Analysis of time delay of gamma-ray bursts",
         thesisLink: "https://is.muni.cz/th/t13kj/" 
       }
@@ -47,26 +108,10 @@ const portfolioData = {
   interests: {
     title: "Research Interests",
     items: [
-      {
-        icon: "Atom", 
-        title: "Quantum Gravity",
-        desc: "Testing modifications of Einstein's gravity and broken Lorentz invariance."
-      },
-      {
-        icon: "Activity", 
-        title: "Gamma-Ray Bursts",
-        desc: "Analyzing time delays and spectral properties of GRB signals."
-      },
-      {
-        icon: "Clock",
-        title: "Time Delay Analysis",
-        desc: "Developing algorithms to detect time lags in high-energy photon arrival."
-      },
-      {
-        icon: "Code",
-        title: "Computational Physics",
-        desc: "Data reduction and statistical modeling of astrophysical datasets."
-      }
+      { icon: "Atom", title: "Quantum Gravity", desc: "Testing modifications of Einstein's gravity and broken Lorentz invariance." },
+      { icon: "Activity", title: "Gamma-Ray Bursts", desc: "Analyzing time delays and spectral properties of GRB signals." },
+      { icon: "Clock", title: "Time Delay Analysis", desc: "Developing algorithms to detect time lags in high-energy photon arrival." },
+      { icon: "Code", title: "Computational Physics", desc: "Data reduction and statistical modeling of astrophysical datasets." }
     ]
   },
 
@@ -79,7 +124,7 @@ const portfolioData = {
         type: "Bachelor Thesis Code",
         year: "2025",
         description: "A comprehensive simulation framework developed for my Bachelor's thesis. It models Gamma-Ray Burst light curves to analyze potential time delays and constrain Quantum Gravity energy scales.",
-        link: "https://github.com/baarborka?tab=repositories" // Linking to your repos so they can find it
+        link: "https://github.com/baarborka?tab=repositories"
       }
     ]
   },
@@ -87,7 +132,7 @@ const portfolioData = {
   // --- CONTACT SECTION ---
   contact: {
     title: "Get in Touch",
-    email: "barbora.hudackova@mail.muni.cz",
+    email: "barb.hudackova@gmail.com",
     linkedin: "https://linkedin.com",
     github: "https://github.com/baarborka?tab=repositories",
     footerText: "© 2025 Barbora Hudačková. Built with React & Tailwind."
@@ -95,7 +140,7 @@ const portfolioData = {
 };
 
 // ==========================================
-// 🛑 END OF EDITABLE SECTION
+// 🧩 SUB-COMPONENTS
 // ==========================================
 
 const IconMap = ({ name, size = 24, className }) => {
@@ -123,9 +168,12 @@ const NavLink = ({ href, children, mobile = false, onClick }) => (
   </a>
 );
 
+// --- MAIN APP COMPONENT ---
+
 export default function AstrophysicsPortfolio() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [stars, setStars] = useState([]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -135,33 +183,71 @@ export default function AstrophysicsPortfolio() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Generate random stars on mount
+  useEffect(() => {
+    const newStars = Array.from({ length: 100 }, (_, i) => ({
+      id: i,
+      top: Math.random() * 100 + '%',
+      left: Math.random() * 100 + '%',
+      size: Math.random() * 2 + 1 + 'px',
+      opacity: Math.random() * 0.7 + 0.3,
+      animationDelay: Math.random() * 5 + 's',
+      animationDuration: Math.random() * 3 + 2 + 's'
+    }));
+    setStars(newStars);
+  }, []);
+
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
+  const scrollToSection = (id) => {
+    setIsMenuOpen(false);
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-200 font-sans selection:bg-cyan-500/30">
+    <div className="min-h-screen bg-slate-950 text-slate-200 font-sans selection:bg-cyan-500/30 overflow-x-hidden">
       
       {/* Background Stars Effect */}
       <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900 via-slate-950 to-black opacity-80"></div>
-        <div className="absolute w-1 h-1 bg-white rounded-full top-10 left-1/4 opacity-70 animate-pulse"></div>
-        <div className="absolute w-1 h-1 bg-cyan-200 rounded-full top-1/3 right-1/4 opacity-50 animate-pulse delay-75"></div>
-        <div className="absolute w-2 h-2 bg-white rounded-full top-1/2 left-1/2 opacity-20"></div>
-        <div className="absolute w-1 h-1 bg-white rounded-full bottom-10 right-10 opacity-60"></div>
+        
+        {/* Generated Stars */}
+        {stars.map((star) => (
+          <div 
+            key={star.id}
+            className="absolute bg-white rounded-full animate-pulse"
+            style={{
+              top: star.top,
+              left: star.left,
+              width: star.size,
+              height: star.size,
+              opacity: star.opacity,
+              animationDelay: star.animationDelay,
+              animationDuration: star.animationDuration
+            }}
+          />
+        ))}
       </div>
 
       {/* Navigation */}
       <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-slate-950/90 backdrop-blur-md border-b border-slate-800 py-3' : 'bg-transparent py-6'}`}>
         <div className="max-w-6xl mx-auto px-6 flex justify-between items-center">
-          <div className="text-xl font-bold tracking-tighter text-cyan-50">
-            {portfolioData.hero.name.split(' ')[1]}
-            <span className="text-cyan-400">.Space</span>
+          <div 
+            className="text-xl font-bold tracking-tighter text-cyan-50 cursor-pointer"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          >
+            {portfolioData.hero.name}
           </div>
 
           <div className="hidden md:flex space-x-8">
-            <NavLink href="#about">About</NavLink>
-            <NavLink href="#research">Interests</NavLink>
-            <NavLink href="#projects">Software</NavLink>
-            <NavLink href="#contact">Contact</NavLink>
+            <NavLink onClick={() => scrollToSection('about')}>About</NavLink>
+            <NavLink onClick={() => scrollToSection('research')}>Interests</NavLink>
+            <NavLink onClick={() => scrollToSection('projects')}>Software</NavLink>
+            <NavLink onClick={() => scrollToSection('cv')}>Resume</NavLink>
+            <NavLink onClick={() => scrollToSection('contact')}>Contact</NavLink>
           </div>
 
           <button onClick={toggleMenu} className="md:hidden text-slate-300 hover:text-white">
@@ -171,10 +257,11 @@ export default function AstrophysicsPortfolio() {
 
         {isMenuOpen && (
           <div className="md:hidden absolute top-full left-0 w-full bg-slate-900 border-b border-slate-800 p-6 flex flex-col space-y-4 shadow-xl">
-            <NavLink href="#about" mobile onClick={toggleMenu}>About</NavLink>
-            <NavLink href="#research" mobile onClick={toggleMenu}>Interests</NavLink>
-            <NavLink href="#projects" mobile onClick={toggleMenu}>Software</NavLink>
-            <NavLink href="#contact" mobile onClick={toggleMenu}>Contact</NavLink>
+            <NavLink mobile onClick={() => scrollToSection('about')}>About</NavLink>
+            <NavLink mobile onClick={() => scrollToSection('research')}>Interests</NavLink>
+            <NavLink mobile onClick={() => scrollToSection('projects')}>Software</NavLink>
+            <NavLink mobile onClick={() => scrollToSection('cv')}>Resume</NavLink>
+            <NavLink mobile onClick={() => scrollToSection('contact')}>Contact</NavLink>
           </div>
         )}
       </nav>
@@ -182,10 +269,8 @@ export default function AstrophysicsPortfolio() {
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 px-6">
         <div className="max-w-4xl mx-auto text-center z-10 relative">
-          <div className="inline-flex items-center px-3 py-1 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-300 text-sm mb-6 animate-fade-in-up">
-            <Star size={14} className="mr-2" />
-            <span>Astrophysics Portfolio</span>
-          </div>
+          {/* Removed the "Astrophysics Portfolio" badge here */}
+          
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight leading-tight">
             {portfolioData.hero.name}
           </h1>
@@ -200,12 +285,13 @@ export default function AstrophysicsPortfolio() {
             {portfolioData.hero.tagline}
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <a href="#research" className="px-8 py-3 bg-cyan-600 hover:bg-cyan-500 text-white font-medium rounded-full transition-all shadow-lg shadow-cyan-900/20">
+            <button onClick={() => scrollToSection('research')} className="px-8 py-3 bg-cyan-600 hover:bg-cyan-500 text-white font-medium rounded-full transition-all shadow-lg shadow-cyan-900/20">
               {portfolioData.hero.primaryAction}
-            </a>
-            <a href="#contact" className="px-8 py-3 bg-slate-800 hover:bg-slate-700 text-slate-200 font-medium rounded-full transition-all border border-slate-700">
-              {portfolioData.hero.secondaryAction}
-            </a>
+            </button>
+            <button onClick={() => scrollToSection('cv')} className="px-8 py-3 bg-slate-800 hover:bg-slate-700 text-slate-200 font-medium rounded-full transition-all border border-slate-700 flex items-center justify-center gap-2">
+              <FileText size={18} />
+              <span>View CV</span>
+            </button>
           </div>
         </div>
         
@@ -223,7 +309,7 @@ export default function AstrophysicsPortfolio() {
                 <span className="w-8 h-1 bg-cyan-500 mr-4 rounded-full"></span>
                 {portfolioData.about.title}
               </h2>
-              <p className="text-slate-400 leading-relaxed mb-6">
+              <p className="text-slate-300 leading-relaxed mb-6">
                 {portfolioData.about.description}
               </p>
               
@@ -238,11 +324,11 @@ export default function AstrophysicsPortfolio() {
                     <div className="w-full">
                       <h4 className="text-white font-medium text-lg">{edu.degree}</h4>
                       <div className="text-cyan-400 text-sm mb-2">{edu.school} • {edu.year}</div>
-                      <p className="text-slate-400 text-sm mb-2">{edu.details}</p>
+                      <p className="text-slate-300 text-sm mb-2">{edu.details}</p>
                       
                       {/* Bachelor's Thesis Link */}
                       {edu.thesisTitle && (
-                         <div className="flex items-center gap-2 mb-2 text-sm text-slate-300">
+                         <div className="flex items-center gap-2 mb-2 text-sm text-slate-400">
                            <Book size={14} className="text-cyan-500"/>
                            <span className="italic">{edu.thesisTitle}</span>
                            {edu.thesisLink && (
@@ -255,12 +341,12 @@ export default function AstrophysicsPortfolio() {
 
                       {/* Master's Assignment Block */}
                       {edu.thesisAssignment && (
-                        <div className="mt-3 p-4 bg-slate-950/50 border border-slate-800 rounded-lg">
+                        <div className="mt-3 p-4 bg-slate-800 border border-slate-700 rounded-lg">
                           <div className="flex items-center gap-2 mb-2 text-cyan-400 text-xs uppercase tracking-wider font-bold">
                             <FileText size={12} />
                             <span>Thesis Assignment</span>
                           </div>
-                          <p className="text-slate-400 text-sm whitespace-pre-line leading-relaxed italic">
+                          <p className="text-white text-sm whitespace-pre-line leading-relaxed italic">
                             {edu.thesisAssignment}
                           </p>
                         </div>
@@ -315,7 +401,7 @@ export default function AstrophysicsPortfolio() {
       </section>
 
       {/* Projects / Software */}
-      <section id="projects" className="py-20 bg-slate-900/30">
+      <section id="projects" className="py-20 relative z-10">
         <div className="max-w-5xl mx-auto px-6">
           <div className="flex items-center justify-between mb-12">
             <h2 className="text-3xl font-bold text-white">{portfolioData.projects.title}</h2>
@@ -323,19 +409,19 @@ export default function AstrophysicsPortfolio() {
 
           <div className="grid gap-6">
             {portfolioData.projects.items.map((project, index) => (
-              <div key={index} className="bg-slate-800/80 backdrop-blur border border-slate-700 p-6 rounded-lg hover:shadow-lg hover:shadow-cyan-900/20 transition-all group">
+              <div key={index} className="bg-slate-900 border border-slate-800 p-6 rounded-xl hover:border-cyan-500/50 hover:bg-slate-800 transition-all duration-300 group">
                 <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-2">
-                      <span className="px-2 py-1 bg-slate-700 text-cyan-300 text-xs rounded uppercase tracking-wider font-semibold">
+                      <span className="px-2 py-1 bg-slate-800 text-cyan-300 text-xs rounded uppercase tracking-wider font-semibold border border-slate-700">
                         {project.type}
                       </span>
-                      <span className="text-slate-400 text-sm">{project.year}</span>
+                      <span className="text-slate-400 text-sm font-bold">{project.year}</span>
                     </div>
-                    <h3 className="text-xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">
+                    <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-cyan-400 transition-colors">
                       {project.title}
                     </h3>
-                    <p className="text-slate-300 mb-4">{project.description}</p>
+                    <p className="text-slate-400 text-sm leading-relaxed">{project.description}</p>
                   </div>
                   {project.link !== '#' && (
                     <a href={project.link} className="inline-flex items-center text-cyan-400 hover:text-cyan-300 font-medium">
@@ -346,6 +432,106 @@ export default function AstrophysicsPortfolio() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* CV / Resume Section */}
+      <section id="cv" className="py-24 relative z-10">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Curriculum Vitae</h2>
+            <div className="w-20 h-1 bg-cyan-500 mx-auto rounded-full mb-8"></div>
+            <a 
+              href={portfolioData.files.cv} 
+              download
+              className="inline-flex items-center px-6 py-3 bg-slate-800 border border-slate-700 hover:border-cyan-500/50 text-white rounded-lg transition-all hover:bg-slate-750 group"
+            >
+              <Download size={18} className="mr-2 group-hover:text-cyan-400 transition-colors" />
+              Download Full PDF
+            </a>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8 mb-8">
+            
+            {/* Left Column: Education & Experience */}
+            <div className="space-y-8">
+              {/* Education Block */}
+              <div className="bg-slate-900 border border-slate-800 p-8 rounded-xl hover:border-cyan-500/30 transition-all">
+                <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-3">
+                  <GraduationCap className="text-cyan-400" size={24} /> Education
+                </h3>
+                <div className="space-y-6">
+                  {portfolioData.cvContent.education.map((edu, idx) => (
+                    <div key={idx} className="group">
+                      <div className="flex justify-between items-start">
+                        <h4 className="text-lg font-semibold text-white group-hover:text-cyan-300 transition-colors">{edu.degree}</h4>
+                        <span className="text-xs font-bold text-cyan-500 bg-cyan-500/10 px-2 py-1 rounded">{edu.year}</span>
+                      </div>
+                      <div className="text-slate-400 text-sm mb-2">{edu.school}</div>
+                      <p className="text-slate-500 text-sm leading-relaxed">{edu.details}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Experience Block */}
+              <div className="bg-slate-900 border border-slate-800 p-8 rounded-xl hover:border-cyan-500/30 transition-all">
+                <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-3">
+                  <Briefcase className="text-cyan-400" size={24} /> Experience
+                </h3>
+                <div className="space-y-6">
+                  {portfolioData.cvContent.experience.map((job, idx) => (
+                    <div key={idx} className="group">
+                      <div className="flex justify-between items-start">
+                        <h4 className="text-lg font-semibold text-white group-hover:text-cyan-300 transition-colors">{job.role}</h4>
+                        <span className="text-xs font-bold text-cyan-500 bg-cyan-500/10 px-2 py-1 rounded">{job.year}</span>
+                      </div>
+                      <div className="text-slate-400 text-sm mb-2">{job.company}</div>
+                      <p className="text-slate-500 text-sm leading-relaxed">{job.desc}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column: Teaching */}
+            <div className="space-y-8">
+              {/* Teaching Block */}
+              <div className="bg-slate-900 border border-slate-800 p-8 rounded-xl hover:border-cyan-500/30 transition-all h-full">
+                <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-3">
+                  <Mic className="text-cyan-400" size={24} /> Teaching & Outreach
+                </h3>
+                <div className="space-y-6">
+                  {portfolioData.cvContent.teaching.map((teach, idx) => (
+                    <div key={idx} className="group">
+                      <div className="flex justify-between items-start">
+                        <h4 className="text-lg font-semibold text-white group-hover:text-cyan-300 transition-colors">{teach.role}</h4>
+                        <span className="text-xs font-bold text-cyan-500 bg-cyan-500/10 px-2 py-1 rounded">{teach.year}</span>
+                      </div>
+                      <div className="text-slate-400 text-sm mb-2">{teach.org}</div>
+                      <p className="text-slate-500 text-sm leading-relaxed">{teach.desc}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Skills Block - Full Width at Bottom */}
+          <div className="bg-slate-900 border border-slate-800 p-8 rounded-xl hover:border-cyan-500/30 transition-all">
+            <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-3">
+              <Code className="text-cyan-400" size={24} /> Skills
+            </h3>
+            <div className="grid md:grid-cols-4 gap-6">
+              {portfolioData.cvContent.skills.map((skill, idx) => (
+                <div key={idx} className="bg-slate-800/50 p-4 rounded-lg border border-slate-700/50 hover:border-cyan-500/30 transition-colors">
+                  <span className="text-sm font-bold text-cyan-300 block mb-2 uppercase tracking-wide">{skill.category}</span>
+                  <span className="text-slate-400 text-sm leading-relaxed block">{skill.items}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
         </div>
       </section>
 
@@ -393,5 +579,3 @@ export default function AstrophysicsPortfolio() {
     </div>
   );
 }
-
-// Portfolio update
