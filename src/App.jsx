@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Book, Mail, Github, Linkedin, ExternalLink, GraduationCap, Telescope, Atom, MapPin, ChevronDown, Menu, X, Star, Activity, Clock, FileText, Code, Download, Phone, Briefcase, Mic } from 'lucide-react';
+import { Book, Mail, Github, Linkedin, ExternalLink, GraduationCap, Telescope, Atom, MapPin, ChevronDown, Menu, X, Star, Activity, Clock, FileText, Code, Download, Phone, Briefcase, Mic, Instagram } from 'lucide-react';
 
 // ==========================================
 // 🚀 USER DATA SECTION
@@ -15,7 +15,7 @@ const portfolioData = {
   // --- HERO SECTION ---
   hero: {
     name: "Barbora Hudačková",
-    title: "Mgr. Astrophysics Student",
+    title: "Masters in Astrophysics Student",
     university: "Masaryk University",
     location: "Brno, Czech Republic",
     tagline: "Testing physics at the Planck scale through Gamma-Ray Burst analysis.",
@@ -135,6 +135,7 @@ const portfolioData = {
     email: "barb.hudackova@gmail.com",
     linkedin: "https://linkedin.com",
     github: "https://github.com/baarborka?tab=repositories",
+    instagram: "https://www.instagram.com/barb_hudackova", // Added Instagram Link
     footerText: "© 2025 Barbora Hudačková. Built with React & Tailwind."
   }
 };
@@ -269,7 +270,6 @@ export default function AstrophysicsPortfolio() {
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 px-6">
         <div className="max-w-4xl mx-auto text-center z-10 relative">
-          {/* Removed the "Astrophysics Portfolio" badge here */}
           
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight leading-tight">
             {portfolioData.hero.name}
@@ -555,6 +555,9 @@ export default function AstrophysicsPortfolio() {
               </a>
               <a href={portfolioData.contact.github} className="flex items-center justify-center w-14 h-14 bg-slate-800 hover:bg-slate-700 text-white rounded-lg transition-all border border-slate-700">
                 <Github size={24} />
+              </a>
+              <a href={portfolioData.contact.instagram} className="flex items-center justify-center w-14 h-14 bg-slate-800 hover:bg-pink-600 text-white rounded-lg transition-all border border-slate-700">
+                <Instagram size={24} />
               </a>
             </div>
           </div>
